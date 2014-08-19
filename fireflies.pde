@@ -21,7 +21,7 @@ boolean brainOne = false;
 boolean brainTwo = false;
 boolean meditate = false;
 PVector w;
-int numFlies = 100;
+int numFlies = 150;
 int signal;
 int t = 10000;
 PImage bg;
@@ -56,7 +56,7 @@ void setup() {
 
 void draw() {
   lights();
-//  background(235, 120, 79);
+  background(235, 120, 79);
   background(bg);
   for (int i = 0; i < trees.length; i++) {
     ttemp = trees[i];
@@ -77,7 +77,7 @@ void draw() {
   if (brains) {
     if (brainOne == true) {
       for (int i = 0; i < greenFlies.size(); i++) {
-        if (delta >= 20000) {
+        if (delta >= 25000) {
           greenFlies.get(i).flash = true;
         } else {
           greenFlies.get(i).flash = false;

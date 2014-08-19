@@ -8,7 +8,7 @@ class Fly {
   boolean flash;
   int timer, med2;
   color cFlash, cDim, cTemp;
-  int topspeed = 5;
+  int topspeed = 6;
   float n, m;
   
   Fly(float x, float y, float z, float f, float p) {
@@ -25,11 +25,13 @@ class Fly {
     timer = millis();
     if (random(1) < 0.5) {
 //      cFlash = color(125, 300, 360); //green flash
-      cFlash = color(92, 151, 360); //single color flash
+//      cFlash = color(92, 151, 360); //old single color flash
+        cFlash = color(108, 190, 360); //new single color flash
       greenFlies.add(this);
     } else {
 //      cFlash = color(50, 300, 360); //yellow flash
-      cFlash = color(92, 151, 360); //single color flash
+//      cFlash = color(92, 151, 360); //single color flash
+        cFlash = color(108, 190, 360); //new single color flash
       yellowFlies.add(this);
     }
     cDim = color(0, 0, 84, 80);
@@ -45,7 +47,7 @@ class Fly {
     PVector v = PVector.add(velocity, acceleration);
     if (meditate) {
       if (meditation != 0) {
-        v.mult(map(100-meditation, 0, 100, 0.5, 5));
+        v.mult(map(100-meditation, 0, 100, 0.1, 6));
       }
     }
     v.limit(topspeed);
@@ -73,12 +75,12 @@ class Fly {
     pushMatrix();
       translate(location.x, location.y, location.z);
       if (flash) {
-        for (float i=0; i<1.0; i+=0.01) {
+        for (float i=0; i<2.0; i+=0.001) {
           cTemp = lerpColor(cDim, cFlash, i);
           fill(cTemp);
         }
       } else {
-          for (float i=0; i<1.0; i+=0.01) {
+          for (float i=0; i<2.0; i+=0.001) {
             cTemp = lerpColor(cFlash, cDim, i);
             fill(cTemp);
           }
