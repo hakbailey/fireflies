@@ -7,7 +7,7 @@ int attention = 0;
 int meditation = 0;
 int blink = 0;
 float delta = 0;
-Fly[] flies = new Fly[200];
+ArrayList<Fly> flies = new ArrayList<Fly>();
 Tree[] trees = new Tree[6];
 ArrayList<PVector> forces = new ArrayList<PVector>();
 ArrayList<Fly> greenFlies = new ArrayList<Fly>();
@@ -16,7 +16,10 @@ Tree ttemp;
 color cTemp;
 boolean sync = false;
 boolean wind = false;
+boolean brainOne = false;
+boolean brainTwo = false;
 PVector w;
+int numFlies = 200;
 
 void setup() {
   size(displayWidth, displayHeight, P3D);
@@ -32,8 +35,8 @@ void setup() {
     popMatrix();
   }
   
-  for (int i = 0; i < flies.length; i++) {
-    flies[i] = new Fly(random(width), random(height-100), random(-20, 20), random(1000, 3500), random(2500, 7000));
+  for (int i = 0; i < numFlies; i++) {
+    flies.add(new Fly(random(width), random(height-100), random(-20, 20), random(1000, 3500), random(2500, 7000)));
   }
 
   ThinkGearSocket neuroSocket = new ThinkGearSocket(this);
@@ -59,33 +62,34 @@ void draw() {
     popMatrix();
   }
   
-  for (int i = 0; i < flies.length; i++) {
-    flies[i].applyForces(forces);
-    flies[i].update();
-    flies[i].flash();
-    flies[i].display();
-    flies[i].checkEdges();
+  for (int i = 0; i < flies.size(); i++) {
+    flies.get(i).applyForces(forces);
+    flies.get(i).update();
+    flies.get(i).flash();
+    flies.get(i).display();
+    flies.get(i).checkEdges();
   }
 }
 
 // Mode changes
 void keyPressed() {
   switch(key) { 
-  case 's':
+  case 'a':
     if (!sync) {
-      for (int i = 0; i < flies.length; i++) {
-        flies[i].flashLength = 2000;
-        flies[i].dimLength = 3000;
-        flies[i].timer = millis();
-        flies[i].flash = true;
-      }
       sync = true;
+      syncFlash(flies, random(1000, 3000), random(2000, 5000));
     } else if (sync) {
-      for (int i = 0; i < flies.length; i++) {
-        flies[i].flashLength = flies[i].initFlashLength;
-        flies[i].dimLength = flies[i].initDimLength;
-      }
       sync = false;
+      unSyncFlash(flies);
+    }
+    break;
+  case 'g':
+    if (!sync) {
+      sync = true;
+      syncFlash(greenFlies, random(1000, 3000), random(2000, 5000));
+    } else if (sync) {
+      sync = false;
+      unSyncFlash(greenFlies);
     }
     break;
   case 'w':
@@ -97,6 +101,15 @@ void keyPressed() {
       w = new PVector(1, 0, 0);
       forces.add(w);
       wind = true;
+    }
+    break;
+  case 'y':
+    if (!sync) {
+      sync = true;
+      syncFlash(yellowFlies, random(1000, 3000), random(2000, 5000));
+    } else if (sync) {
+      sync = false;
+      unSyncFlash(yellowFlies);
     }
     break;
   default:
@@ -113,11 +126,27 @@ void keyPressed() {
 //  attention = attentionLevel;
 //}
 
-public void meditationEvent(int meditationLevel) {
-  meditation = meditationLevel;
-}
+//public void meditationEvent(int meditationLevel) {
+//  meditation = meditationLevel;
+//}
 
 void stop() {
   neuroSocket.stop();
   super.stop();
+}
+
+void syncFlash(ArrayList<Fly> flyList, float newFlash, float newDim) {
+  for (int i = 0; i < flyList.size(); i++) {
+    flyList.get(i).flashLength = newFlash;
+    flyList.get(i).dimLength = newDim;
+    flyList.get(i).timer = millis();
+    flyList.get(i).flash = true;
+  }
+}
+
+void unSyncFlash(ArrayList<Fly> flyList) { 
+  for (int i = 0; i < flyList.size(); i++) {
+    flyList.get(i).flashLength = flyList.get(i).initFlashLength;
+    flyList.get(i).dimLength = flyList.get(i).initDimLength;
+  }
 }

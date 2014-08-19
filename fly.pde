@@ -36,7 +36,6 @@ class Fly {
     } else {
       flash = true;
     }
-    println(greenFlies);
   }
   
   // Update firefly location
