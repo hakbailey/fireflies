@@ -24,10 +24,12 @@ class Fly {
     dimLength = p;
     timer = millis();
     if (random(1) < 0.5) {
-      cFlash = color(125, 300, 360); //green flash
+//      cFlash = color(125, 300, 360); //green flash
+      cFlash = color(92, 151, 360); //single color flash
       greenFlies.add(this);
     } else {
-      cFlash = color(50, 300, 360); //yellow flash
+//      cFlash = color(50, 300, 360); //yellow flash
+      cFlash = color(92, 151, 360); //single color flash
       yellowFlies.add(this);
     }
     cDim = color(0, 0, 84, 80);
@@ -43,7 +45,7 @@ class Fly {
     PVector v = PVector.add(velocity, acceleration);
     if (meditate) {
       if (meditation != 0) {
-        v.mult(map(100-meditation, 0, 100, 1, 5));
+        v.mult(map(100-meditation, 0, 100, 0.5, 5));
       }
     }
     v.limit(topspeed);

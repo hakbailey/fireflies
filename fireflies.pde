@@ -21,9 +21,10 @@ boolean brainOne = false;
 boolean brainTwo = false;
 boolean meditate = false;
 PVector w;
-int numFlies = 200;
+int numFlies = 100;
 int signal;
 int t = 10000;
+PImage bg;
 
 void setup() {
   size(displayWidth, displayHeight, P3D);
@@ -32,6 +33,8 @@ void setup() {
   noStroke();
   textureMode(NORMAL);
   textureWrap(REPEAT);
+  bg = loadImage("mountains_05.jpg");
+  bg.resize(width, height);
 
   for (int i = 0; i < trees.length; i++) {
     pushMatrix();
@@ -53,7 +56,8 @@ void setup() {
 
 void draw() {
   lights();
-  background(235, 120, 79);
+//  background(235, 120, 79);
+  background(bg);
   for (int i = 0; i < trees.length; i++) {
     ttemp = trees[i];
     float zVal = map(ttemp.zBase, -150, 0, 80, 160);
