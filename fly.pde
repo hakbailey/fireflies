@@ -61,11 +61,6 @@ class Fly {
     }
   }
   
-  // Set firefly flashlength
-  void setFlash(float nf) {
-    flashLength = nf;
-  }
-  
   // Draw firefly
   void display() {
     pushMatrix();

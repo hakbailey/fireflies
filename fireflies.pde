@@ -16,10 +16,13 @@ Tree ttemp;
 color cTemp;
 boolean sync = false;
 boolean wind = false;
+boolean brains = false;
 boolean brainOne = false;
 boolean brainTwo = false;
 PVector w;
 int numFlies = 200;
+int signal;
+int t = 10000;
 
 void setup() {
   size(displayWidth, displayHeight, P3D);
@@ -62,6 +65,22 @@ void draw() {
     popMatrix();
   }
   
+  if (signal == 0) {
+    brainOne = true;
+  }
+  
+  if (brains) {
+    if (brainOne == true) {
+      for (int i = 0; i < greenFlies.size(); i++) {
+        if (delta >= 20000) {
+          greenFlies.get(i).flash = true;
+        } else {
+          greenFlies.get(i).flash = false;
+        }
+      }
+    }
+  }
+  
   for (int i = 0; i < flies.size(); i++) {
     flies.get(i).applyForces(forces);
     flies.get(i).update();
@@ -81,6 +100,13 @@ void keyPressed() {
     } else if (sync) {
       sync = false;
       unSyncFlash(flies);
+    }
+    break;
+  case 'b':
+    if (brains) {
+      brains = false;
+    } else if (!brains) {
+      brains = true;
     }
     break;
   case 'g':
@@ -117,10 +143,14 @@ void keyPressed() {
   }
 }
 
-//public void eegEvent(int _delta, int theta, int low_alpha, int high_alpha, int low_beta, int high_beta, int low_gamma, int mid_gamma) {
-//  delta = _delta;
-//  //  eeg = "Delta: " + delta + ", theta: " + theta + ", low alpha: " + low_alpha + ", high alpha: " + high_alpha;
-//}
+public void poorSignalEvent(int sig) {
+  signal = sig;
+}
+
+public void eegEvent(int _delta, int _theta, int _low_alpha, int _high_alpha, int _low_beta, int _high_beta, int _low_gamma, int _mid_gamma) {
+  delta = _delta;
+  //  eeg = "Delta: " + delta + ", theta: " + theta + ", low alpha: " + low_alpha + ", high alpha: " + high_alpha;
+}
 
 //public void attentionEvent(int attentionLevel) {
 //  attention = attentionLevel;
