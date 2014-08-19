@@ -19,6 +19,7 @@ boolean wind = false;
 boolean brains = false;
 boolean brainOne = false;
 boolean brainTwo = false;
+boolean meditate = false;
 PVector w;
 int numFlies = 200;
 int signal;
@@ -88,6 +89,8 @@ void draw() {
     flies.get(i).display();
     flies.get(i).checkEdges();
   }
+  
+  println(meditation);
 }
 
 // Mode changes
@@ -116,6 +119,13 @@ void keyPressed() {
     } else if (sync) {
       sync = false;
       unSyncFlash(greenFlies);
+    }
+    break;
+  case 'm':
+    if (meditate) {
+      meditate = false;
+    } else {
+      meditate = true;
     }
     break;
   case 'w':
@@ -156,9 +166,9 @@ public void eegEvent(int _delta, int _theta, int _low_alpha, int _high_alpha, in
 //  attention = attentionLevel;
 //}
 
-//public void meditationEvent(int meditationLevel) {
-//  meditation = meditationLevel;
-//}
+public void meditationEvent(int meditationLevel) {
+  meditation = meditationLevel;
+}
 
 void stop() {
   neuroSocket.stop();

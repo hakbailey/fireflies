@@ -8,7 +8,7 @@ class Fly {
   boolean flash;
   int timer, med2;
   color cFlash, cDim, cTemp;
-  int topspeed = 3;
+  int topspeed = 5;
   float n, m;
   
   Fly(float x, float y, float z, float f, float p) {
@@ -41,6 +41,11 @@ class Fly {
   // Update firefly location
   void update() {
     PVector v = PVector.add(velocity, acceleration);
+    if (meditate) {
+      if (meditation != 0) {
+        v.mult(map(100-meditation, 0, 100, 1, 5));
+      }
+    }
     v.limit(topspeed);
     location.add(v);
     acceleration.mult(0);
@@ -97,24 +102,5 @@ class Fly {
     for (int i=0; i<forces.size(); i++) {
       acceleration.add(forces.get(i));
     }
-  }
-    
-//    // Randomize acceleration direction and set its magnitude based on meditation state
-//    acceleration = PVector.random3D();
-//    acceleration.mult(0.01);
-//    
-//    if (meditation != 0) {
-//      med2 = 100-meditation;
-//      if (meditation >= 60) {
-//        m = map(med2, 0, 40, -1, -0.0001);
-//      } else {
-//        m = map(med2, 40, 100, 0.0001, 1);
-//      }
-////      acceleration = new PVector(velocity.x*m, velocity.y*m, velocity.z*m);
-//     acceleration.setMag(m);
-//    }
-//    println("m = " + m);
-//    println("acceleration = " + acceleration);
-//  }
-    
+  }    
 }
