@@ -46,8 +46,8 @@ class Fly {
   void update() {
     PVector v = PVector.add(velocity, acceleration);
     if (meditate) {
-      if (meditation != 0) {
-        v.mult(map(100-meditation, 0, 100, 0.1, 6));
+      if (headsets[0].meditation != 0) {
+        v.mult(map(100  - headsets[0].meditation, 0, 100, 0.1, 6));
       }
     }
     v.limit(topspeed);
