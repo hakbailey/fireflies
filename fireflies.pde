@@ -116,11 +116,18 @@ void draw() {
         }
       }
     }
-      
+  }
+  if(headsets[0].signal || headsets[1].signal) {
     for (int i = 0; i < flies.size(); i++) {
       float hue = hue(flies.get(i).cFlash);
       if (attention) {
-        float brightness = map(headsets[1].attention, 0, 100, 100, 300);
+        float brightness;
+        if(headsets[1].signal) {
+          brightness = map(headsets[1].attention, 0, 100, 100, 300);
+        } else {
+          brightness = map(headsets[0].attention, 0, 100, 100, 300);
+        }
+          
         flies.get(i).cFlash = color(hue, 300, brightness);
       } else {
         flies.get(i).cFlash = color(hue, 300, 360);
