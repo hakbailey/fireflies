@@ -96,13 +96,13 @@ void draw() {
         }
       }
       
-      float hue = hue(greenFlies.get(i).cFlash);
-      if (attention) {
-        float brightness = map(headsets[0].attention, 0, 100, 100, 300);
-        greenflies.get(i).cFlash = color(hue, 300, brightness);
-      } else {
-        greenFlies.get(i).cFlash = color(hue, 300, 360);
-      }
+//      float hue = hue(greenFlies.get(i).cFlash);
+//      if (attention) {
+//        float brightness = map(headsets[0].attention, 0, 100, 100, 300);
+//        greenFlies.get(i).cFlash = color(hue, 300, brightness);
+//      } else {
+//        greenFlies.get(i).cFlash = color(hue, 300, 360);
+//      }
     }
   }
       
@@ -115,23 +115,31 @@ void draw() {
           yellowFlies.get(i).flash = false;
         }
       }
+    }
       
-      float hue = hue(yellowFlies.get(i).cFlash);
+    for (int i = 0; i < flies.size(); i++) {
+      float hue = hue(flies.get(i).cFlash);
       if (attention) {
         float brightness = map(headsets[1].attention, 0, 100, 100, 300);
-        yellowFlies.get(i).cFlash = color(hue, 300, brightness);
+        flies.get(i).cFlash = color(hue, 300, brightness);
       } else {
-        yellowFlies.get(i).cFlash = color(hue, 300, 360);
+        flies.get(i).cFlash = color(hue, 300, 360);
       }
     }
   }
   
   if (sync_mode) {
     if (headsets[0].signal && headsets[1].signal) {
-      if (abs(headsets[0].attention - headsets[1].attention) < 5) {
+      if (abs(headsets[0].meditation - headsets[1].meditation) < 10) {
         syncFlash(flies, random(1000, 3000), random(2000, 5000));
       } else {
         unSyncFlash(flies);
+      }
+    }
+    
+     if (headsets[0].signal && headsets[1].signal) {
+      if (abs(headsets[0].attention - headsets[1].attention) < 10) {
+        changeColors(flies);
       }
     }
   }
@@ -250,5 +258,12 @@ void unSyncFlash(ArrayList<Fly> flyList) {
   for (int i = 0; i < flyList.size(); i++) {
     flyList.get(i).flashLength = flyList.get(i).initFlashLength;
     flyList.get(i).dimLength = flyList.get(i).initDimLength;
+  }
+}
+
+void changeColors(ArrayList<Fly> flyList) {
+  color newColor = color(random(360), 190, 360);
+  for (int i = 0; i < flyList.size(); i++) {
+    flyList.get(i).cFlash = newColor;
   }
 }
