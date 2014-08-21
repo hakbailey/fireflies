@@ -93,6 +93,10 @@ void draw() {
           greenFlies.get(i).flash = false;
         }
       }
+//      if (meditate) {
+//        if (headsets[0].meditation != 0) {
+//          greenFlies.get(i).v.mult(map(100  - headsets[0].meditation, 0, 100, 0.1, 6));
+//        }
     }
   }
       
@@ -105,6 +109,11 @@ void draw() {
           yellowFlies.get(i).flash = false;
         }
       }
+//      if (meditate) {
+//        if (headsets[1].meditation != 0) {
+//          yellowFlies.get(i).v.mult(map(100  - headsets[1].meditation, 0, 100, 0.1, 6));
+//        }
+//      }
     }
   }
   
