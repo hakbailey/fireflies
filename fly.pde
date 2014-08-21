@@ -52,6 +52,9 @@ class Fly {
       if (headsets[0].meditation != 0) {
         v.mult(map(100  - headsets[0].meditation, 0, 100, 0.1, 6));
       }
+      if (headsets[1].meditation != 0) {
+        v.mult(map(100  - headsets[1].meditation, 0, 100, 0.1, 6));
+      }
     }
     v.limit(topspeed);
     location.add(v);

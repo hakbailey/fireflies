@@ -86,13 +86,9 @@ void draw() {
     popMatrix();
   }
   
-  if (signal == 0) {
-    brainOne = true;
-  }
-  
-  if (brains) {
-    if (headsets[0].signal) {
-      for (int i = 0; i < greenFlies.size(); i++) {
+  if (headsets[0].signal) {
+    for (int i = 0; i < greenFlies.size(); i++) {
+      if (brains) {
         if (headsets[0].delta >= 25000) {
           greenFlies.get(i).flash = true;
         } else {
@@ -100,8 +96,11 @@ void draw() {
         }
       }
     }
-    if (headsets[1].signal) {
-      for (int i = 0; i < yellowFlies.size(); i++) {
+  }
+      
+  if (headsets[1].signal) {
+    for (int i = 0; i < yellowFlies.size(); i++) {
+      if (brains) {
         if (headsets[1].delta >= 25000) {
           yellowFlies.get(i).flash = true;
         } else {
@@ -112,13 +111,11 @@ void draw() {
   }
   
   for (int i = 0; i < flies.size(); i++) {
-    if (brainOne) {
-      flies.get(i).applyForces(forces);
-      flies.get(i).update();
-      flies.get(i).flash();
-      flies.get(i).display();
-      flies.get(i).checkEdges();
-    }
+    flies.get(i).applyForces(forces);
+    flies.get(i).update();
+    flies.get(i).flash();
+    flies.get(i).display();
+    flies.get(i).checkEdges();
   }
 }
 
