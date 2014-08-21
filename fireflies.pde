@@ -98,10 +98,8 @@ void draw() {
       
       float hue = hue(greenFlies.get(i).cFlash);
       if (attention) {
-        float brightness = headsets[0].attention / 50;
-        brightness = constrain(brightness, 0, 1);
-        brightness = lerp(100,360, brightness);
-        greenFlies.get(i).cFlash = color(hue, 300, brightness);
+        float brightness = map(headsets[0].attention, 0, 100, 100, 300);
+        greenflies.get(i).cFlash = color(hue, 300, brightness);
       } else {
         greenFlies.get(i).cFlash = color(hue, 300, 360);
       }
@@ -120,9 +118,7 @@ void draw() {
       
       float hue = hue(yellowFlies.get(i).cFlash);
       if (attention) {
-        float brightness = headsets[1].attention / 50;
-        brightness = constrain(brightness, 0, 1);
-        brightness = lerp(100,360, brightness);
+        float brightness = map(headsets[1].attention, 0, 100, 100, 300);
         yellowFlies.get(i).cFlash = color(hue, 300, brightness);
       } else {
         yellowFlies.get(i).cFlash = color(hue, 300, 360);
