@@ -55,6 +55,8 @@ class Fly {
 //      if (headset < 2) {
         if (headsets[0].meditation != 0) {
           v.mult(map(100  - headsets[0].meditation, 0, 100, 0.1, 6));
+        } else if( headsets[1].meditation != 0) {
+          v.mult(map(100  - headsets[1].meditation, 0, 100, 0.1, 6));
         }
 //      }
     }
