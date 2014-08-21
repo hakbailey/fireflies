@@ -1,8 +1,9 @@
 import processing.video.*;
 import neurosky.*;
-import org.json.*;
+//import org.json.*;
  
 ThinkGearSocket neuroSocket;
+MindSetSerial[] headsets = new MindSetSerial[2];
 int attention = 0;
 int meditation = 0;
 int blink = 0;
@@ -14,6 +15,7 @@ ArrayList<Fly> greenFlies = new ArrayList<Fly>();
 ArrayList<Fly> yellowFlies = new ArrayList<Fly>();
 Tree ttemp;
 color cTemp;
+final boolean useThinkGear = false;
 boolean sync = false;
 boolean wind = false;
 boolean brains = false;
@@ -45,16 +47,21 @@ void setup() {
   for (int i = 0; i < numFlies; i++) {
     flies.add(new Fly(random(width), random(height-100), random(-20, 20), random(1000, 3500), random(2500, 7000)));
   }
-
-  ThinkGearSocket neuroSocket = new ThinkGearSocket(this);
-  try {
-    neuroSocket.start();
-  } catch (Exception e) {
-    e.printStackTrace();
+  if(useThinkGear) {
+    ThinkGearSocket neuroSocket = new ThinkGearSocket(this);
+    try {
+      neuroSocket.start();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  } else {
+    headsets[0] = new MindSetSerial(0,this);
+    headsets[0].start();
   }
 }
 
 void draw() {
+  headsets[0].update();
   lights();
   background(235, 120, 79);
   background(bg);
