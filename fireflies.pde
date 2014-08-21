@@ -23,9 +23,7 @@ final int portTwo = 18;
 
 boolean sync = false;
 boolean wind = false;
-boolean brains = false;
-boolean brainOne = false;
-boolean brainTwo = false;
+boolean delta_mode = false;
 boolean meditate = false;
 PVector w;
 int numFlies = 150;
@@ -88,7 +86,7 @@ void draw() {
   
   if (headsets[0].signal) {
     for (int i = 0; i < greenFlies.size(); i++) {
-      if (brains) {
+      if (delta_mode) {
         if (headsets[0].delta >= 25000) {
           greenFlies.get(i).flash = true;
         } else {
@@ -100,7 +98,7 @@ void draw() {
       
   if (headsets[1].signal) {
     for (int i = 0; i < yellowFlies.size(); i++) {
-      if (brains) {
+      if (delta_mode) {
         if (headsets[1].delta >= 25000) {
           yellowFlies.get(i).flash = true;
         } else {
@@ -131,11 +129,11 @@ void keyPressed() {
       unSyncFlash(flies);
     }
     break;
-  case 'b':
-    if (brains) {
-      brains = false;
-    } else if (!brains) {
-      brains = true;
+  case 'd':
+    if (delta_mode) {
+      delta_mode = false;
+    } else if (!delta_mode) {
+      delta_mode = true;
     }
     break;
   case 'g':
