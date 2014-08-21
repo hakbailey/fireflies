@@ -35,7 +35,7 @@ class Fly {
       yellowFlies.add(this);
     }
     cDim = color(0, 0, 84, 80);
-    if (random(1) < 0.5) {
+    if (random(1) < 0.3) {
       flash = false;
     } else {
       flash = true;

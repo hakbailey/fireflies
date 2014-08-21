@@ -99,11 +99,13 @@ void draw() {
   }
   
   for (int i = 0; i < flies.size(); i++) {
-    flies.get(i).applyForces(forces);
-    flies.get(i).update();
-    flies.get(i).flash();
-    flies.get(i).display();
-    flies.get(i).checkEdges();
+    if (brainOne) {
+      flies.get(i).applyForces(forces);
+      flies.get(i).update();
+      flies.get(i).flash();
+      flies.get(i).display();
+      flies.get(i).checkEdges();
+    }
   }
   
   println(meditation);
