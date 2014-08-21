@@ -130,7 +130,7 @@ void draw() {
   
   if (sync_mode) {
     if (headsets[0].signal && headsets[1].signal) {
-      if (abs(headsets[0].meditation - headsets[1].meditation) < 10) {
+      if (abs(headsets[0].meditation - headsets[1].meditation) < 5) {
         syncFlash(flies, random(1000, 3000), random(2000, 5000));
       } else {
         unSyncFlash(flies);
@@ -138,7 +138,7 @@ void draw() {
     }
     
      if (headsets[0].signal && headsets[1].signal) {
-      if (abs(headsets[0].attention - headsets[1].attention) < 10) {
+      if (abs(headsets[0].attention - headsets[1].attention) < 5) {
         changeColors(flies);
       }
     }
