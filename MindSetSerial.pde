@@ -24,7 +24,7 @@ class MindSetSerial {
   // instance variables
   private Serial port;
   private boolean on = false;
-  private static int count = 0;
+  //private static int count = 0;
   private int id;
 
   //MindSet readings
@@ -117,10 +117,9 @@ class MindSetSerial {
   } // update()
 
 
-  MindSetSerial(int portNum, PApplet applet) {
+  MindSetSerial(int portNum, PApplet applet, int id) {
     port = new Serial(applet, Serial.list()[portNum], 57600);
-    instance = count;
-    count++;
+    this.id = id;
   }
 
   private void parsePacket()
