@@ -19,9 +19,10 @@ color cTemp;
 // Serial headset
 final boolean useThinkGear = false;
 final int portOne = 2;
-final int portTwo = 18;
+final int portTwo = 3;
 
 boolean sync = false;
+boolean sync_mode = false;
 boolean wind = false;
 boolean delta_mode = false;
 boolean meditate = false;
@@ -120,7 +121,16 @@ void draw() {
       } else {
         yellowFlies.get(i).cFlash = color(hue, 300, 360);
       }
-
+    }
+  }
+  
+  if (sync_mode) {
+    if (headsets[0].signal && headsets[1].signal) {
+      if (abs(headsets[0].attention - headsets[1].attention) < 10) {
+        syncFlash(flies, random(1000, 3000), random(2000, 5000));
+      } else {
+        unSyncFlash(flies);
+      }
     }
   }
   
@@ -142,14 +152,9 @@ void keyPressed() {
     } else {
       attention = true;
     }
-  case 's':
-    if (!sync) {
-      sync = true;
-      syncFlash(flies, random(1000, 3000), random(2000, 5000));
-    } else if (sync) {
-      sync = false;
-      unSyncFlash(flies);
-    }
+    break;
+  case 'b':
+    sync_mode = !sync_mode;
     break;
   case 'd':
     if (delta_mode) {
@@ -172,6 +177,15 @@ void keyPressed() {
       meditate = false;
     } else {
       meditate = true;
+    }
+    break;
+  case 's':
+    if (!sync) {
+      sync = true;
+      syncFlash(flies, random(1000, 3000), random(2000, 5000));
+    } else if (sync) {
+      sync = false;
+      unSyncFlash(flies);
     }
     break;
   case 'w':

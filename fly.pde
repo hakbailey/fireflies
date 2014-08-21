@@ -10,7 +10,7 @@ class Fly {
   color cFlash, cDim, cTemp;
   int topspeed = 6;
   float n, m;
-  int headset;
+  int headset = 2;
   
   Fly(float x, float y, float z, float f, float p) {
     // Initialize variables for motion
@@ -25,13 +25,13 @@ class Fly {
     dimLength = p;
     timer = millis();
     float r = random(1);
-    if (r < 0.25) {
+    if (r < 0.5) {
       cFlash = color(125, 300, 360); //green flash
 //      cFlash = color(92, 151, 360); //old single color flash
 //        cFlash = color(108, 190, 360); //new single color flash
       greenFlies.add(this);
       headset = 0;
-    } else if (r > 0.75) {
+    } else if (r > 0.5) {
       cFlash = color(50, 300, 360); //yellow flash
 //      cFlash = color(92, 151, 360); //single color flash
 //        cFlash = color(108, 190, 360); //new single color flash
@@ -52,9 +52,11 @@ class Fly {
   void update() {
     PVector v = PVector.add(velocity, acceleration);
     if (meditate) {
-      if (headsets[headset].meditation != 0) {
-        v.mult(map(100  - headsets[headset].meditation, 0, 100, 0.1, 6));
-      }
+//      if (headset < 2) {
+        if (headsets[0].meditation != 0) {
+          v.mult(map(100  - headsets[0].meditation, 0, 100, 0.1, 6));
+        }
+//      }
     }
     v.limit(topspeed);
     location.add(v);
