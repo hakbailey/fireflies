@@ -101,7 +101,7 @@ void draw() {
         float brightness = headsets[0].attention / 50;
         brightness = constrain(brightness, 0, 1);
         brightness = lerp(100,360, brightness);
-        greenflies.get(i).cFlash = color(hue, 300, brightness);
+        greenFlies.get(i).cFlash = color(hue, 300, brightness);
       } else {
         greenFlies.get(i).cFlash = color(hue, 300, 360);
       }
@@ -132,7 +132,7 @@ void draw() {
   
   if (sync_mode) {
     if (headsets[0].signal && headsets[1].signal) {
-      if (abs(headsets[0].attention - headsets[1].attention) < 10) {
+      if (abs(headsets[0].attention - headsets[1].attention) < 5) {
         syncFlash(flies, random(1000, 3000), random(2000, 5000));
       } else {
         unSyncFlash(flies);
