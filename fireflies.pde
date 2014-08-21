@@ -18,8 +18,8 @@ color cTemp;
 
 // Serial headset
 final boolean useThinkGear = false;
-final int portOne = 0;
-final int portTwo = 2;
+final int portOne = 2;
+final int portTwo = 18;
 
 boolean sync = false;
 boolean wind = false;
@@ -40,7 +40,8 @@ void setup() {
   noStroke();
   textureMode(NORMAL);
   textureWrap(REPEAT);
-  bg = loadImage("mountains_05.jpg");
+  println(Serial.list());
+  bg = loadImage("mountains_08_cc.jpg");
   bg.resize(width, height);
 
   for (int i = 0; i < trees.length; i++) {
@@ -62,11 +63,14 @@ void setup() {
   } else {
     headsets[0] = new MindSetSerial(portOne,this, 0);
     headsets[0].start();
+    headsets[1] = new MindSetSerial(portTwo,this, 1);
+    headsets[1].start();
   }
 }
 
 void draw() {
   headsets[0].update();
+  headsets[1].update();
   lights();
   background(235, 120, 79);
   background(bg);
@@ -87,12 +91,21 @@ void draw() {
   }
   
   if (brains) {
-    if (brainOne == true) {
+    if (headsets[0].signal) {
       for (int i = 0; i < greenFlies.size(); i++) {
         if (headsets[0].delta >= 25000) {
           greenFlies.get(i).flash = true;
         } else {
           greenFlies.get(i).flash = false;
+        }
+      }
+    }
+    if (headsets[1].signal) {
+      for (int i = 0; i < yellowFlies.size(); i++) {
+        if (headsets[1].delta >= 25000) {
+          yellowFlies.get(i).flash = true;
+        } else {
+          yellowFlies.get(i).flash = false;
         }
       }
     }

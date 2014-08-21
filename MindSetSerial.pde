@@ -241,7 +241,10 @@ class MindSetSerial {
 
       case 0x04:  // ATTENTION
         attention = (int)payload[bytesParsed];
-        if (signal) println("Attention: " + attention);    // do not print if you are experiencing a poor signal
+        if (signal) {
+          println(id);
+          println("Attention: " + attention);    // do not print if you are experiencing a poor signal
+        }
         break;
 
       case 0x05:  // MEDITATION

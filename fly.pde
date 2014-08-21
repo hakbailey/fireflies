@@ -23,16 +23,19 @@ class Fly {
     initDimLength = p;
     dimLength = p;
     timer = millis();
-    if (random(1) < 0.5) {
-//      cFlash = color(125, 300, 360); //green flash
+    float r = random(1);
+    if (r < 0.25) {
+      cFlash = color(125, 300, 360); //green flash
 //      cFlash = color(92, 151, 360); //old single color flash
-        cFlash = color(108, 190, 360); //new single color flash
+//        cFlash = color(108, 190, 360); //new single color flash
       greenFlies.add(this);
-    } else {
-//      cFlash = color(50, 300, 360); //yellow flash
+    } else if (r > 0.75) {
+      cFlash = color(50, 300, 360); //yellow flash
 //      cFlash = color(92, 151, 360); //single color flash
-        cFlash = color(108, 190, 360); //new single color flash
+//        cFlash = color(108, 190, 360); //new single color flash
       yellowFlies.add(this);
+    } else {
+      cFlash = color(360); //new single color flash
     }
     cDim = color(0, 0, 84, 80);
     if (random(1) < 0.3) {
