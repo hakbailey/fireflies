@@ -25,6 +25,7 @@ boolean sync = false;
 boolean wind = false;
 boolean delta_mode = false;
 boolean meditate = false;
+boolean attention = false;
 PVector w;
 int numFlies = 150;
 int signal;
@@ -93,10 +94,13 @@ void draw() {
           greenFlies.get(i).flash = false;
         }
       }
-//      if (meditate) {
-//        if (headsets[0].meditation != 0) {
-//          greenFlies.get(i).v.mult(map(100  - headsets[0].meditation, 0, 100, 0.1, 6));
-//        }
+      
+      float hue = hue(greenFlies.get(i).cFlash);
+      if (attention) {
+        greenFlies.get(i).cFlash = color(hue, 300, lerp(100,360, headsets[0].attention / 100));
+      } else {
+        greenFlies.get(i).cFlash = color(hue, 300, 360);
+      }
     }
   }
       
@@ -109,11 +113,14 @@ void draw() {
           yellowFlies.get(i).flash = false;
         }
       }
-//      if (meditate) {
-//        if (headsets[1].meditation != 0) {
-//          yellowFlies.get(i).v.mult(map(100  - headsets[1].meditation, 0, 100, 0.1, 6));
-//        }
-//      }
+      
+      float hue = hue(yellowFlies.get(i).cFlash);
+      if (attention) {
+        yellowFlies.get(i).cFlash = color(hue, 300, lerp(100,360, headsets[0].attention / 100));
+      } else {
+        yellowFlies.get(i).cFlash = color(hue, 300, 360);
+      }
+
     }
   }
   
@@ -130,6 +137,12 @@ void draw() {
 void keyPressed() {
   switch(key) { 
   case 'a':
+    if(attention) {
+      attention = false;
+    } else {
+      attention = true;
+    }
+  case 's':
     if (!sync) {
       sync = true;
       syncFlash(flies, random(1000, 3000), random(2000, 5000));
