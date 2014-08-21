@@ -15,7 +15,12 @@ ArrayList<Fly> greenFlies = new ArrayList<Fly>();
 ArrayList<Fly> yellowFlies = new ArrayList<Fly>();
 Tree ttemp;
 color cTemp;
+
+// Serial headset
 final boolean useThinkGear = false;
+final int portOne = 0;
+final int portTwo = 2;
+
 boolean sync = false;
 boolean wind = false;
 boolean brains = false;
@@ -55,7 +60,7 @@ void setup() {
       e.printStackTrace();
     }
   } else {
-    headsets[0] = new MindSetSerial(0,this);
+    headsets[0] = new MindSetSerial(portOne,this, 0);
     headsets[0].start();
   }
 }
