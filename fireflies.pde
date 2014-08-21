@@ -4,10 +4,10 @@ import neurosky.*;
  
 ThinkGearSocket neuroSocket;
 MindSetSerial[] headsets = new MindSetSerial[2];
-int attention = 0;
-int meditation = 0;
-int blink = 0;
-float delta = 0;
+//int attention = 0;
+//int meditation = 0;
+//int blink = 0;
+//float delta = 0;
 ArrayList<Fly> flies = new ArrayList<Fly>();
 Tree[] trees = new Tree[6];
 ArrayList<PVector> forces = new ArrayList<PVector>();
@@ -89,7 +89,7 @@ void draw() {
   if (brains) {
     if (brainOne == true) {
       for (int i = 0; i < greenFlies.size(); i++) {
-        if (delta >= 25000) {
+        if (headsets[0].delta >= 25000) {
           greenFlies.get(i).flash = true;
         } else {
           greenFlies.get(i).flash = false;
@@ -108,7 +108,7 @@ void draw() {
     }
   }
   
-  println(meditation);
+  println(headsets[0].meditation);
 }
 
 // Mode changes
@@ -176,7 +176,7 @@ public void poorSignalEvent(int sig) {
 }
 
 public void eegEvent(int _delta, int _theta, int _low_alpha, int _high_alpha, int _low_beta, int _high_beta, int _low_gamma, int _mid_gamma) {
-  delta = _delta;
+  //delta = _delta;
   //  eeg = "Delta: " + delta + ", theta: " + theta + ", low alpha: " + low_alpha + ", high alpha: " + high_alpha;
 }
 
@@ -185,7 +185,7 @@ public void eegEvent(int _delta, int _theta, int _low_alpha, int _high_alpha, in
 //}
 
 public void meditationEvent(int meditationLevel) {
-  meditation = meditationLevel;
+  //meditation = meditationLevel;
 }
 
 void stop() {
