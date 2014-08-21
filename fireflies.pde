@@ -95,8 +95,6 @@ void draw() {
       flies.get(i).checkEdges();
     }
   }
-  
-  println(meditation);
 }
 
 // Mode changes
