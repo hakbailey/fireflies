@@ -31,7 +31,7 @@ class MindSetSerial {
   public int rawWave = 0;
   public int attention = 0;
   public int meditation = 0;
-  public boolean signal = true;         // ture -> good signal, false -> poor signal
+  public boolean signal = false;         // ture -> good signal, false -> poor signal
 
   // EEG Readings
   public long delta = 0;         // 0.5 - 2.75Hz
